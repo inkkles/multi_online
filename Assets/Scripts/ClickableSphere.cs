@@ -8,18 +8,16 @@ public class ClickableSphere : NetworkBehaviour
     [SerializeField] NetworkVariable<int> sphereNumber = new NetworkVariable<int>();
     [SerializeField] TMP_Text sphereText;
 
-    public int SphereNumber { get => sphereNumber.Value; set => sphereNumber.Value = value; }
+    bool randomized;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int SphereNumber { get => sphereNumber.Value; set => sphereNumber.Value = value; } 
 
     // Update is called once per frame
     void Update()
     {
         sphereText.text = sphereNumber.Value.ToString();
+        if (IsServer && !randomized)
+            randomizeSphereNumberServerRpc();
     }
 
     private void OnMouseDown()
@@ -33,6 +31,13 @@ public class ClickableSphere : NetworkBehaviour
         sphereNumber.Value += clicksToAdd;
         if(sphereNumber.Value == 10)
             sphereNumber.Value = 0;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void randomizeSphereNumberServerRpc()
+    {
+        sphereNumber.Value = Random.Range(0, 10);
+        randomized = true;
     }
 
 }

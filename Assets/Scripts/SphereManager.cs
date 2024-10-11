@@ -12,14 +12,6 @@ public class SphereManager : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Randomize sphere numbers
-        if(IsServer)
-        {
-            foreach(ClickableSphere cs in clickableSpheres)
-            {
-                cs.SphereNumber = Random.Range(0, 10);
-            }
-        }
         //clickableSpheres = GetComponentsInChildren<ClickableSphere>();
     }
 
