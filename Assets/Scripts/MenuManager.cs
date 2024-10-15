@@ -40,4 +40,6 @@ public class MenuManager : NetworkBehaviour
         leaveButton.SetActive(false);
     }
 
+
+
 }

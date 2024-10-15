@@ -33,6 +33,7 @@ public class ClickableSphere : NetworkBehaviour
             sphereNumber.Value = 0;
     }
 
+
     [Rpc(SendTo.Server)]
     private void randomizeSphereNumberServerRpc()
     {
